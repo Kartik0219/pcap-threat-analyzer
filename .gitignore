@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+out/
+*.pcap
+!tests/fixtures/*.pcap
+
+# Reports generated locally while demoing the tool
+*.report.html
+*.report.csv
