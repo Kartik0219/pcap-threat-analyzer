@@ -69,36 +69,96 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PCAP Threat Analysis Report</title>
 <style>
-  body {{ font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; color: #1b1f23; }}
-  h1 {{ margin-bottom: 0.2rem; }}
-  .meta {{ color: #57606a; margin-bottom: 1.5rem; }}
-  table {{ border-collapse: collapse; width: 100%; }}
-  th, td {{ border: 1px solid #d0d7de; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }}
-  th {{ background: #f6f8fa; }}
-  tr.high {{ background: #ffeef0; }}
-  tr.medium {{ background: #fff8e6; }}
-  tr.low {{ background: #f6f8fa; }}
-  .badge {{ font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 0.3rem; }}
-  .badge.high {{ background: #cf222e; color: white; }}
-  .badge.medium {{ background: #9a6700; color: white; }}
-  .badge.low {{ background: #57606a; color: white; }}
-  code {{ font-size: 0.85em; }}
+  *, *::before, *::after {{ box-sizing: border-box; }}
+  body {{
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f7;
+    margin: 0;
+    padding: 2.5rem 1.5rem 5rem;
+    color: #1d1d1f;
+    -webkit-font-smoothing: antialiased;
+  }}
+  .container {{ max-width: 1040px; margin: 0 auto; }}
+  h1 {{
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.4rem;
+  }}
+  .meta {{
+    font-size: 0.88rem;
+    color: #6e6e73;
+    margin: 0 0 2rem;
+  }}
+  .card {{
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.06);
+    overflow: hidden;
+  }}
+  table {{ border-collapse: collapse; width: 100%; font-size: 0.88rem; }}
+  th {{
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6e6e73;
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+  }}
+  td {{
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid #f5f5f7;
+    vertical-align: top;
+  }}
+  tr:last-child td {{ border-bottom: none; }}
+  tr.high   {{ background: rgba(255,103,0,.045); }}
+  tr.medium {{ background: rgba(255,149,0,.045); }}
+  tr.low    {{ background: transparent; }}
+  .badge {{
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.22rem 0.65rem;
+    border-radius: 20px;
+    color: #fff;
+    white-space: nowrap;
+  }}
+  .badge.high   {{ background: #ff6700; }}
+  .badge.medium {{ background: #ff9500; }}
+  .badge.low    {{ background: #34c759; }}
+  code {{
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.82em;
+    background: #f5f5f7;
+    padding: 0.1em 0.4em;
+    border-radius: 5px;
+  }}
 </style>
 </head>
 <body>
+<div class="container">
   <h1>PCAP Threat Analysis Report</h1>
   <p class="meta">Source capture: <code>{pcap_path}</code> &middot; Generated {generated} &middot; {summary}</p>
-  <table>
-    <thead>
-      <tr><th>Confidence</th><th>Category</th><th>Source</th><th>Destination</th>
-          <th>First Seen</th><th>Last Seen</th><th>Summary</th><th>Evidence</th></tr>
-    </thead>
-    <tbody>
-      {rows}
-    </tbody>
-  </table>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Confidence</th><th>Category</th><th>Source</th><th>Destination</th>
+            <th>First Seen</th><th>Last Seen</th><th>Summary</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  </div>
+</div>
 </body>
 </html>
 """
